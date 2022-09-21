@@ -25,6 +25,7 @@ class Weapon(
     val weight: Int,
     val type: WeaponType
 ) {
+    // testing
     override fun equals(other: Any?) = when {
         this === other                 -> true
         other !is Weapon               -> false
