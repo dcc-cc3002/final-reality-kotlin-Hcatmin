@@ -20,7 +20,7 @@ import java.util.concurrent.BlockingQueue
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Your name~
  */
-interface PlayerCharacter {
+interface PlayerCharacter : GameCharacter {
   val equippedWeapon: Weapon
 
   /**
