@@ -16,4 +16,8 @@ enemies controlled by the computer.
 
 ---
 
-**The rest of the documentation is left for the users of this template to complete**
+El primer problema de diseño que me hizo ruido fue en Weapon.kt. En esta parte del código, si 
+se desea implementar otro tipo de arma (por ejemplo) se incurriría a modificar las clases actuales, 
+y se estaría violando el Open Closed Principle.
+
+En un inicio, sólo existe la clase Weapon, pero STAFF es de tipo mágico y tiene daño mágico.

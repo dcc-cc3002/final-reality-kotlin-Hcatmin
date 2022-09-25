@@ -1,15 +1,22 @@
 package cl.uchile.dcc.finalreality
 
-import cl.uchile.dcc.finalreality.model.Weapon
-import cl.uchile.dcc.finalreality.model.WeaponType
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.character.player.Thief
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage
+import cl.uchile.dcc.finalreality.model.inventory.MagicWeapon
+import cl.uchile.dcc.finalreality.model.inventory.Weapon
+import cl.uchile.dcc.finalreality.model.inventory.WeaponType
+import cl.uchile.dcc.finalreality.model.inventory.MagicWeaponType
 import java.util.concurrent.LinkedBlockingQueue
 import kotlin.random.Random
 
 fun main() {
     println("Student: Roberto Alvarado Bustamante 20992516-8")
+    println("MagicWeapon test")
+//    val staff1 = MagicWeapon("", 0, Random.nextInt(1, 50), WeaponType.KNIFE, 0)
+    val staff2 = MagicWeapon("", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 0)
+//    println(staff1.toString())
+    println(staff2.toString())
     println("Thief test")
     val queueThief = LinkedBlockingQueue<GameCharacter>()
     for (i in 0 until 10) {
@@ -31,7 +38,7 @@ fun main() {
     val queueWMage = LinkedBlockingQueue<GameCharacter>()
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
-        val weapon = Weapon("", 0, Random.nextInt(1, 50), WeaponType.KNIFE)
+        val weapon = MagicWeapon("", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 0)
         val character = WhiteMage("$i", 10, 5, 10, queueWMage)
         character.equip(weapon)
         character.waitTurn()
