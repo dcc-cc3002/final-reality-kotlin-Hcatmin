@@ -43,6 +43,6 @@ class MagicWeapon(
 
     override fun hashCode() = Objects.hash(MagicWeapon::class, name, damage, weight, type, magicdamage)
 
-    override fun toString() = "MagicWeapon { name: $name, damage: $damage, weight: $weight, " +
+    override fun toString() = "MagicWeapon ( name: $name, damage: $damage, weight: $weight, " +
         "type: $type, magicdamage: $magicdamage )"
 }

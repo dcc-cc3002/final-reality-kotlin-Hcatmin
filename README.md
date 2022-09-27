@@ -21,3 +21,7 @@ se desea implementar otro tipo de arma (por ejemplo) se incurriría a modificar 
 y se estaría violando el Open Closed Principle.
 
 En un inicio, sólo existe la clase Weapon, pero STAFF es de tipo mágico y tiene daño mágico.
+
+Después de releer el enunciado, se consideró que todas las armas tienen el mismo comportamiento. 
+En mi diagrama inicial, bajo esta lógica hice que MagicWeapon herede de Weapon pero ahora esto
+no me parece del todo correcto. Aquí se aplicaría el Liskov Substitution Principle.
