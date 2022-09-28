@@ -24,7 +24,7 @@ class Weapon(
     override val damage: Int,
     override val weight: Int,
     override val type: WeaponType,
-) : GameWeapon{
+) : GameWeapon {
     // testing
     override fun equals(other: Any?) = when {
         this === other -> true

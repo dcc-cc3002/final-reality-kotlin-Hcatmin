@@ -7,5 +7,5 @@ package cl.uchile.dcc.finalreality.model.inventory
  * @author ~Your name~
  */
 enum class WeaponType {
-    SWORD, AXE, KNIFE, BOW
+    SWORD, AXE, KNIFE, BOW,
 }
