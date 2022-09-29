@@ -7,7 +7,6 @@
  */
 package cl.uchile.dcc.finalreality.model.character.player
 
-import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 
 /**
@@ -18,7 +17,7 @@ import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Your name~
  */
-interface PlayerCharacter : GameCharacter {
+interface PlayerCharacter {
     val equippedWeapon: GameWeapon
 
     /**
