@@ -8,7 +8,9 @@
 package cl.uchile.dcc.finalreality.model.character.player
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import java.util.*
+/* ktlint-disable no-wildcard-imports */
+import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
+/* ktlint-enable no-wildcard-imports */
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -26,20 +28,20 @@ import java.util.concurrent.BlockingQueue
  * @author ~Your name~
  */
 class Thief(name: String, maxHp: Int, defense: Int, turnsQueue: BlockingQueue<GameCharacter>) :
-  AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
+    AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
     override fun equals(other: Any?) = when {
-        this === other                 -> true
-        other !is Thief                -> false
+        this === other -> true
+        other !is Thief -> false
         hashCode() != other.hashCode() -> false
-        name != other.name             -> false
-        maxHp != other.maxHp           -> false
-        defense != other.defense       -> false
-        else                           -> true
+        name != other.name -> false
+        maxHp != other.maxHp -> false
+        defense != other.defense -> false
+        else -> true
     }
 
     override fun hashCode() = Objects.hash(Thief::class, name, maxHp, defense)
 
     override fun toString() =
-      "Thief{maxHp=$maxHp, currentHp=$currentHp, defense=$defense, name='$name'}"
+        "Thief{maxHp=$maxHp, currentHp=$currentHp, defense=$defense, name='$name'}"
 }

@@ -44,7 +44,7 @@ fun main() {
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
         val weapon = MagicWeapon("", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 0)
-        val character = BlackMage("$i", 10, 5, 10, queueBlackMage)
+        val character = BlackMage("$i", 10, 5, queueBlackMage, 10)
         character.equip(weapon)
         character.waitTurn()
     }
@@ -109,7 +109,7 @@ fun main() {
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
         val weapon = MagicWeapon("", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 0)
-        val character = WhiteMage("$i", 10, 5, 10, queueWMage)
+        val character = WhiteMage("$i", 10, 10, queueWMage, 0)
         character.equip(weapon)
         character.waitTurn()
     }
