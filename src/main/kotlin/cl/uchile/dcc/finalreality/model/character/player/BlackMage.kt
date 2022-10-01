@@ -8,7 +8,9 @@
 package cl.uchile.dcc.finalreality.model.character.player
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import java.util.*
+/* ktlint-disable no-wildcard-imports */
+import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
+/* ktlint-enable no-wildcard-imports */
 import java.util.concurrent.BlockingQueue
 
 /**

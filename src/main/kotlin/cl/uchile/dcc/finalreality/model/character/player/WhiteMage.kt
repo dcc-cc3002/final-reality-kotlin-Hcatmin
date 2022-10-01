@@ -8,7 +8,9 @@
 package cl.uchile.dcc.finalreality.model.character.player
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import java.util.*
+/* ktlint-disable no-wildcard-imports */
+import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
+/* ktlint-enable no-wildcard-imports */
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -47,8 +49,11 @@ class WhiteMage(
     }
 
     override fun hashCode() = Objects.hash(WhiteMage::class, name, maxHp, maxMp, defense)
-
-    override fun toString() =
-      "WhiteMage(currentMp=$currentMp, maxMp=$maxMp, maxHp=$maxHp, currentHp=$currentHp, " +
-        "defense=$defense, name='$name')"
+    override fun toString() = "WhiteMage { " +
+        "name: '$name' " +
+        "maxMp: $maxMp, " +
+        "maxHp: $maxHp, " +
+        "defense: $defense, " +
+        "currentMp: $currentMp, " +
+        "}"
 }
