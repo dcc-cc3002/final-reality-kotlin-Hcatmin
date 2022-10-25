@@ -29,7 +29,7 @@ abstract class AbstractCharacter(
     private val turnsQueue: BlockingQueue<GameCharacter>,
 ) : GameCharacter {
 
-    private lateinit var scheduledExecutor: ScheduledExecutorService
+    lateinit var scheduledExecutor: ScheduledExecutorService
     override val maxHp = Require.Stat(maxHp, "Max Hp") atLeast 1
     override var currentHp = maxHp
         set(value) {
@@ -61,7 +61,7 @@ abstract class AbstractCharacter(
     /**
      * Adds this character to the turns queue.
      */
-    private fun addToQueue() {
+    fun addToQueue() {
         turnsQueue.put(this)
         scheduledExecutor.shutdown()
     }

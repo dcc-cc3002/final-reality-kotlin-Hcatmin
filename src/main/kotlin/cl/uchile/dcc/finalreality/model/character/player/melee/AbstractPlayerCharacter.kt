@@ -1,9 +1,13 @@
-package cl.uchile.dcc.finalreality.model.character.player
+package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Weapon
 import java.util.concurrent.BlockingQueue
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 /**
  * A class that holds all the information of a player-controlled character in the game.
@@ -24,11 +28,29 @@ abstract class AbstractPlayerCharacter(
     turnsQueue: BlockingQueue<GameCharacter>
 ) : AbstractCharacter(name, maxHp, defense, turnsQueue), PlayerCharacter {
 
-    private lateinit var _equippedWeapon: GameWeapon
-    override val equippedWeapon: GameWeapon
+//    private lateinit var _equippedWeapon: GameWeapon
+//    override val equippedWeapon: GameWeapon
+//        get() = _equippedWeapon
+//
+//    override fun equip(weapon: GameWeapon) {
+//        _equippedWeapon = weapon
+//    }
+    private lateinit var _equippedWeapon: Weapon
+    override val equippedWeapon: Weapon
         get() = _equippedWeapon
 
     override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = weapon
+        if (weapon is Weapon) {
+            _equippedWeapon = weapon
+        }
+    }
+
+    override fun waitTurn() {
+        scheduledExecutor = Executors.newSingleThreadScheduledExecutor()
+        scheduledExecutor.schedule(
+            /* command = */ ::addToQueue,
+            /* delay = */ (this.equippedWeapon.weight / 10).toLong(),
+            /* unit = */ TimeUnit.SECONDS
+        )
     }
 }

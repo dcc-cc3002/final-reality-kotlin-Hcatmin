@@ -1,5 +1,6 @@
-package cl.uchile.dcc.finalreality.model.inventory
+package cl.uchile.dcc.finalreality.model.inventory.magic
 
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import java.util.Objects
 
 /**
@@ -21,11 +22,10 @@ import java.util.Objects
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Roberto Alvarado~
  */
-class MagicWeapon(
+open class MagicWeapon(
     override val name: String,
     override val damage: Int,
     override val weight: Int,
-    override val type: MagicWeaponType,
     private val magicdamage: Int,
 ) : GameWeapon {
     // testing
@@ -37,12 +37,10 @@ class MagicWeapon(
         damage != other.damage -> false
         magicdamage != other.magicdamage -> false
         weight != other.weight -> false
-        type != other.type -> false
         else -> true
     }
 
-    override fun hashCode() = Objects.hash(MagicWeapon::class, name, damage, weight, type, magicdamage)
+    override fun hashCode() = Objects.hash(MagicWeapon::class, name, damage, weight, magicdamage)
 
-    override fun toString() = "MagicWeapon ( name: $name, damage: $damage, weight: $weight, " +
-        "type: $type, magicdamage: $magicdamage )"
+    override fun toString() = "MagicWeapon ( name: $name, damage: $damage, weight: $weight, magicdamage: $magicdamage )"
 }

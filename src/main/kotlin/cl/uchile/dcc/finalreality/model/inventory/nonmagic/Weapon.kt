@@ -1,5 +1,6 @@
-package cl.uchile.dcc.finalreality.model.inventory
+package cl.uchile.dcc.finalreality.model.inventory.nonmagic
 
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import java.util.Objects
 
 /**
@@ -19,11 +20,10 @@ import java.util.Objects
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Your name~
  */
-class Weapon(
+open class Weapon(
     override val name: String,
     override val damage: Int,
     override val weight: Int,
-    override val type: WeaponType,
 ) : GameWeapon {
     // testing
     override fun equals(other: Any?) = when {
@@ -33,11 +33,10 @@ class Weapon(
         name != other.name -> false
         damage != other.damage -> false
         weight != other.weight -> false
-        type != other.type -> false
         else -> true
     }
 
-    override fun hashCode() = Objects.hash(Weapon::class, name, damage, weight, type)
+    override fun hashCode() = Objects.hash(Weapon::class, name, damage, weight)
 
-    override fun toString() = "Weapon ( name: $name, damage: $damage, weight: $weight, type: $type)"
+    override fun toString() = "Weapon ( name: $name, damage: $damage, weight: $weight)"
 }

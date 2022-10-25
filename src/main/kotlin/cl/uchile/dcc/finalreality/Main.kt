@@ -3,15 +3,13 @@ package cl.uchile.dcc.finalreality
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException
 import cl.uchile.dcc.finalreality.model.character.Enemy
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import cl.uchile.dcc.finalreality.model.character.player.BlackMage
-import cl.uchile.dcc.finalreality.model.character.player.Engineer
-import cl.uchile.dcc.finalreality.model.character.player.Knight
-import cl.uchile.dcc.finalreality.model.character.player.Thief
-import cl.uchile.dcc.finalreality.model.character.player.WhiteMage
-import cl.uchile.dcc.finalreality.model.inventory.MagicWeapon
-import cl.uchile.dcc.finalreality.model.inventory.MagicWeaponType
-import cl.uchile.dcc.finalreality.model.inventory.Weapon
-import cl.uchile.dcc.finalreality.model.inventory.WeaponType
+import cl.uchile.dcc.finalreality.model.character.player.mage.BlackMage
+import cl.uchile.dcc.finalreality.model.character.player.mage.WhiteMage
+import cl.uchile.dcc.finalreality.model.character.player.melee.Engineer
+import cl.uchile.dcc.finalreality.model.character.player.melee.Knight
+import cl.uchile.dcc.finalreality.model.character.player.melee.Thief
+import cl.uchile.dcc.finalreality.model.inventory.magic.MagicWeapon
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Weapon
 import java.util.concurrent.LinkedBlockingQueue
 import kotlin.random.Random
 
@@ -19,12 +17,12 @@ fun main() {
     println("Student: Roberto Alvarado Bustamante 20992516-8")
     println()
     println("--- Weapon test ---")
-    val axe = Weapon("Diamond Axe", 20, 35, WeaponType.AXE)
-    val bow = Weapon("Haunted Bow", 15, 18, WeaponType.BOW)
-    val bow2 = Weapon("Diamond Axe", 20, 35, WeaponType.BOW)
-    val knife = Weapon("Valkyrie Knife", 20, 9, WeaponType.KNIFE)
-    val sword = Weapon("Excalibur", 50, 50, WeaponType.SWORD)
-    val sword2 = Weapon("Excalibur", 50, 50, WeaponType.SWORD)
+    val axe = Weapon("Diamond Axe", 20, 35)
+    val bow = Weapon("Haunted Bow", 15, 18)
+    val bow2 = Weapon("Diamond Axe", 20, 35)
+    val knife = Weapon("Valkyrie Knife", 20, 9)
+    val sword = Weapon("Excalibur", 50, 50)
+    val sword2 = Weapon("Excalibur", 50, 50)
     print("axe = ")
     println(axe.toString())
     print("bow = ")
@@ -43,9 +41,9 @@ fun main() {
     println("sword2 == sword is " + sword2.equals(sword))
     println()
     println("--- MagicWeapon test ---")
-    val staff1 = MagicWeapon("Staff1", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 10)
+    val staff1 = MagicWeapon("Staff1", 0, Random.nextInt(1, 50), 10)
     val staff2 = staff1
-    val staff3 = MagicWeapon("Staff3", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 20)
+    val staff3 = MagicWeapon("Staff3", 0, Random.nextInt(1, 50), 20)
     print("staff1 = ")
     println(staff1.toString())
     print("staff2 = ")
@@ -61,22 +59,34 @@ fun main() {
     print("staff3 == staff1 is ")
     println(staff3.equals(staff1))
 
-    try { // En esta tarea, este try/catch no debiese fallar
+    try { // En la tarea 1, este try/catch podia NO fallar
         val queueEngineer = LinkedBlockingQueue<GameCharacter>()
-        val magicweapon = MagicWeapon("", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 0)
+        val magicweapon = MagicWeapon("", 0, Random.nextInt(1, 50),0)
         val character = Engineer("Genio", 10, 10, queueEngineer)
         character.equip(magicweapon)
-        println("Try/Catch: Engineer was able to equip a magicweapon")
         character.waitTurn()
-    } catch (e: InvalidStatValueException) {
-        println("A magic weapon was equiped to a non-magic character.")
+        println("Try/Catch: Engineer was able to equip a magicweapon")
+    } catch (e: UninitializedPropertyAccessException) {
+        println("Error: A non-magic character tried to equip a magicweapon")
         println(e.message)
     }
+    try { // Este try/catch debiese fallar
+        val queueBlackMage = LinkedBlockingQueue<GameCharacter>()
+        val weapon = Weapon("", 0, Random.nextInt(1, 50))
+        val character = BlackMage("Mago Porfiado", 10, 5, queueBlackMage, 10)
+        character.equip(weapon)
+        character.waitTurn()
+        println("Try/Catch: BlackMage was able to equip a melee weapon")
+    } catch (e: UninitializedPropertyAccessException) {
+        println("Error: BlackMage wasn't able to equip a melee weapon.")
+        println(e.message)
+    }
+
     println("--- BlackMage Stats ---")
     val queueBlackMage = LinkedBlockingQueue<GameCharacter>()
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
-        val weapon = MagicWeapon("", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 0)
+        val weapon = MagicWeapon("", 0, Random.nextInt(1, 50), 0)
         val character = BlackMage("$i", 10, 5, queueBlackMage, 10)
         character.equip(weapon)
         character.waitTurn()
@@ -92,7 +102,7 @@ fun main() {
     val queueEngineer = LinkedBlockingQueue<GameCharacter>()
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
-        val weapon = Weapon("", 0, Random.nextInt(1, 50), WeaponType.AXE)
+        val weapon = Weapon("", 0, Random.nextInt(1, 50))
         val character = Engineer("$i", 10, 10, queueEngineer)
         character.equip(weapon)
         character.waitTurn()
@@ -108,7 +118,7 @@ fun main() {
     val queueKnight = LinkedBlockingQueue<GameCharacter>()
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
-        val weapon = Weapon("", 0, Random.nextInt(1, 50), WeaponType.SWORD)
+        val weapon = Weapon("", 0, Random.nextInt(1, 50))
         val character = Knight("$i", 10, 10, queueKnight)
         character.equip(weapon)
         character.waitTurn()
@@ -124,7 +134,7 @@ fun main() {
     val queueThief = LinkedBlockingQueue<GameCharacter>()
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
-        val weapon = Weapon("", 0, Random.nextInt(1, 50), WeaponType.KNIFE)
+        val weapon = Weapon("", 0, Random.nextInt(1, 50))
         val character = Thief("$i", 10, 10, queueThief)
         character.equip(weapon)
         character.waitTurn()
@@ -141,7 +151,7 @@ fun main() {
     val queueWMage = LinkedBlockingQueue<GameCharacter>()
     for (i in 0 until 10) {
         // Gives a random speed to each character to generate different waiting times
-        val weapon = MagicWeapon("", 0, Random.nextInt(1, 50), MagicWeaponType.STAFF, 0)
+        val weapon = MagicWeapon("", 0, Random.nextInt(1, 50), 0)
         val character = WhiteMage("$i", 10, 10, queueWMage, 0)
         character.equip(weapon)
         character.waitTurn()

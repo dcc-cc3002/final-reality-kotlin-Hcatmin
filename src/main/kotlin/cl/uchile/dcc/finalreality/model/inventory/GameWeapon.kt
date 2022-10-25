@@ -21,5 +21,4 @@ interface GameWeapon {
     val name: String
     val damage: Int
     val weight: Int
-    val type: Any
 }

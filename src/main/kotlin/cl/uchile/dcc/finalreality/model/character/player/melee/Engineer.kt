@@ -5,9 +5,10 @@
  * You should have received a copy of the license along with this
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
-package cl.uchile.dcc.finalreality.model.character.player
+package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -29,8 +30,7 @@ import java.util.concurrent.BlockingQueue
 class Engineer(
     name: String, maxHp: Int, defense: Int,
     turnsQueue: BlockingQueue<GameCharacter>
-) :
-    AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
+) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
     override fun equals(other: Any?) = when {
         this === other -> true
