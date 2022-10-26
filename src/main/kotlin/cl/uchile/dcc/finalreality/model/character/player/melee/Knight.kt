@@ -8,6 +8,10 @@
 package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Axe
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Knife
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Sword
 /* ktlint-disable no-wildcard-imports */
 import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
 /* ktlint-enable no-wildcard-imports */
@@ -34,6 +38,17 @@ class Knight(
     defense: Int,
     turnsQueue: BlockingQueue<GameCharacter>
 ) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
+    override fun equip(weapon: GameWeapon) {
+        if (weapon is Axe) {
+            _equippedWeapon = weapon
+        }
+        else if (weapon is Knife) {
+            _equippedWeapon = weapon
+        }
+        else if (weapon is Sword) {
+            _equippedWeapon = weapon
+        }
+    }
     override fun equals(other: Any?) = when {
         this === other -> true
         other !is Knight -> false

@@ -18,9 +18,15 @@ repositories {
 dependencies {
     implementation("io.kotest:kotest-property:5.4.2")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.4.2")
+    
 }
-
+/*
 tasks.test {
+    useJUnitPlatform()
+}
+*/
+
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 

@@ -7,7 +7,6 @@ import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter
 import cl.uchile.dcc.finalreality.model.character.player.melee.AbstractPlayerCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import cl.uchile.dcc.finalreality.model.inventory.magic.MagicWeapon
-import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Weapon
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -34,24 +33,7 @@ abstract class AbstractMageCharacter(
     defense: Int,
     turnsQueue: BlockingQueue<GameCharacter>,
     maxMp: Int,
-) : AbstractCharacter(name, maxHp, defense, turnsQueue), PlayerCharacter {
-
-    //    private lateinit var _equippedWeapon: GameWeapon
-//    override val equippedWeapon: GameWeapon
-//        get() = _equippedWeapon
-//
-//    override fun equip(weapon: GameWeapon) {
-//        _equippedWeapon = weapon
-//    }
-    private lateinit var _equippedWeapon: MagicWeapon
-    override val equippedWeapon: MagicWeapon
-        get() = _equippedWeapon
-
-    override fun equip(weapon: GameWeapon) {
-        if (weapon is MagicWeapon) {
-            _equippedWeapon = weapon
-        }
-    }
+) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
     override fun waitTurn() {
         scheduledExecutor = Executors.newSingleThreadScheduledExecutor()
