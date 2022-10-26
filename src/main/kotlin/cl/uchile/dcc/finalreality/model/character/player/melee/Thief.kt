@@ -12,6 +12,7 @@ import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Bow
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Knife
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Sword
+import java.lang.AssertionError
 /* ktlint-disable no-wildcard-imports */
 import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
 /* ktlint-enable no-wildcard-imports */
@@ -40,14 +41,11 @@ class Thief(
     AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
     override fun equip(weapon: GameWeapon) {
-        if (weapon is Bow) {
-            _equippedWeapon = weapon
-        }
-        else if (weapon is Knife) {
-            _equippedWeapon = weapon
-        }
-        else if (weapon is Sword) {
-            _equippedWeapon = weapon
+        _equippedWeapon = when (weapon) {
+            is Bow -> weapon
+            is Knife -> weapon
+            is Sword -> weapon
+            else -> throw AssertionError(weapon.javaClass)
         }
     }
     override fun equals(other: Any?) = when {

@@ -43,13 +43,13 @@ class BlackMage(
 
     override val equippedWeapon: GameWeapon
         get() = _equippedWeapon
+//    source: https://stackoverflow.com/questions/33602705/best-way-to-implement-visitor-pattern-in-kotlin
     override fun equip(weapon: GameWeapon) {
-        if (weapon is Axe) {
-            _equippedWeapon = weapon
-        }
-        else if (weapon is Staff) {
-            _equippedWeapon = weapon
-        }
+    _equippedWeapon = when (weapon) {
+        is Axe -> weapon
+        is Staff -> weapon
+        else -> throw AssertionError(weapon.javaClass)
+    }
     }
 
     override fun equals(other: Any?) = when {

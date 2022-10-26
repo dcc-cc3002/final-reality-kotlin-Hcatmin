@@ -11,6 +11,7 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Axe
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Bow
+import java.lang.AssertionError
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -34,11 +35,10 @@ class Engineer(
     turnsQueue: BlockingQueue<GameCharacter>
 ) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
     override fun equip(weapon: GameWeapon) {
-        if (weapon is Axe) {
-            _equippedWeapon = weapon
-        }
-        if (weapon is Bow) {
-            _equippedWeapon = weapon
+        _equippedWeapon = when (weapon) {
+            is Axe -> weapon
+            is Bow -> weapon
+            else -> throw AssertionError(weapon.javaClass)
         }
     }
 

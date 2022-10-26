@@ -5,6 +5,8 @@ import cl.uchile.dcc.finalreality.exceptions.Require
 import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
 /* ktlint-enable no-wildcard-imports */
 import java.util.concurrent.BlockingQueue
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 /**
  * A class that holds all the information of a single enemy of the game.
@@ -43,4 +45,13 @@ class Enemy(
 
     override fun hashCode() = Objects.hash(Enemy::class, name, weight, maxHp, defense)
     override fun toString(): String = "Enemy(name=$name, weight=$weight, maxHp=$maxHp, defense=$defense )"
+
+    override fun waitTurn() {
+        scheduledExecutor = Executors.newSingleThreadScheduledExecutor()
+        scheduledExecutor.schedule(
+            /* command = */ ::addToQueue,
+            /* delay = */ (this.weight / 10).toLong(),
+            /* unit = */ TimeUnit.SECONDS
+        )
+    }
 }

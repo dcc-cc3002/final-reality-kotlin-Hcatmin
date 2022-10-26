@@ -69,7 +69,7 @@ fun main() {
         character.equip(magicweapon)
         character.waitTurn()
         println("Try/Catch: Engineer was able to equip a magicweapon")
-    } catch (e: UninitializedPropertyAccessException) {
+    } catch (e: AssertionError) {
         println("Error: A non-magic character tried to equip a magicweapon")
         println(e.message)
     }
@@ -80,7 +80,7 @@ fun main() {
         character.equip(weapon)
         character.waitTurn()
         println("Try/Catch: BlackMage was able to equip a melee weapon")
-    } catch (e: UninitializedPropertyAccessException) {
+    } catch (e: AssertionError) {
         println("Error: BlackMage wasn't able to equip a melee weapon.")
         println(e.message)
     }
@@ -92,7 +92,7 @@ fun main() {
         character.equip(weapon)
         character.waitTurn()
         println("Try/Catch: WhiteMage was able to equip a melee weapon")
-    } catch (e: UninitializedPropertyAccessException) {
+    } catch (e: AssertionError) {
         println("Error: WhiteMage wasn't able to equip a melee weapon.")
         println(e.message)
     }
