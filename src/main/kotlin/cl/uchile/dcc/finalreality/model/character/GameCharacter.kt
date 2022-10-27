@@ -23,7 +23,7 @@ interface GameCharacter {
     val defense: Int
 
     /**
-     * Sets a scheduled executor to make this character (thread) wait for `speed / 10`
+     * Sets a scheduled executor to make this character (thread) w  ait for `speed / 10`
      * seconds before adding the character to the queue.
      */
     fun waitTurn()

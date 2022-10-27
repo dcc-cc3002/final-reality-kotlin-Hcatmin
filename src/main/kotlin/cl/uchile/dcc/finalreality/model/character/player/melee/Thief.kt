@@ -5,10 +5,17 @@
  * You should have received a copy of the license along with this
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
-package cl.uchile.dcc.finalreality.model.character.player
+package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import java.util.*
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Bow
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Knife
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Sword
+import java.lang.AssertionError
+/* ktlint-disable no-wildcard-imports */
+import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
+/* ktlint-enable no-wildcard-imports */
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -25,21 +32,26 @@ import java.util.concurrent.BlockingQueue
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Your name~
  */
-class Thief(name: String, maxHp: Int, defense: Int, turnsQueue: BlockingQueue<GameCharacter>) :
-  AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
+class Thief(
+    name: String,
+    maxHp: Int,
+    defense: Int,
+    turnsQueue: BlockingQueue<GameCharacter>,
+) :
+    AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
     override fun equals(other: Any?) = when {
-        this === other                 -> true
-        other !is Thief                -> false
+        this === other -> true
+        other !is Thief -> false
         hashCode() != other.hashCode() -> false
-        name != other.name             -> false
-        maxHp != other.maxHp           -> false
-        defense != other.defense       -> false
-        else                           -> true
+        name != other.name -> false
+        maxHp != other.maxHp -> false
+        defense != other.defense -> false
+        else -> true
     }
 
     override fun hashCode() = Objects.hash(Thief::class, name, maxHp, defense)
 
     override fun toString() =
-      "Thief{maxHp=$maxHp, currentHp=$currentHp, defense=$defense, name='$name'}"
+        "Thief { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
 }

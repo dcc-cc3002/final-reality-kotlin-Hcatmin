@@ -29,7 +29,7 @@ abstract class AbstractCharacter(
     private val turnsQueue: BlockingQueue<GameCharacter>,
 ) : GameCharacter {
 
-    private lateinit var scheduledExecutor: ScheduledExecutorService
+    lateinit var scheduledExecutor: ScheduledExecutorService
     override val maxHp = Require.Stat(maxHp, "Max Hp") atLeast 1
     override var currentHp = maxHp
         set(value) {
@@ -37,31 +37,10 @@ abstract class AbstractCharacter(
         }
     override val defense = Require.Stat(defense, "Defense") atLeast 0
 
-    override fun waitTurn() {
-        scheduledExecutor = Executors.newSingleThreadScheduledExecutor()
-        when (this) {
-            is PlayerCharacter -> {
-                scheduledExecutor.schedule(
-                    /* command = */ ::addToQueue,
-                    /* delay = */ (this.equippedWeapon.weight / 10).toLong(),
-                    /* unit = */ TimeUnit.SECONDS
-                )
-            }
-
-            is Enemy -> {
-                scheduledExecutor.schedule(
-                    /* command = */ ::addToQueue,
-                    /* delay = */ (this.weight / 10).toLong(),
-                    /* unit = */ TimeUnit.SECONDS
-                )
-            }
-        }
-    }
-
     /**
      * Adds this character to the turns queue.
      */
-    private fun addToQueue() {
+    fun addToQueue() {
         turnsQueue.put(this)
         scheduledExecutor.shutdown()
     }

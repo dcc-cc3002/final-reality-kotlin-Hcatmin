@@ -1,8 +1,12 @@
 package cl.uchile.dcc.finalreality.model.character
 
 import cl.uchile.dcc.finalreality.exceptions.Require
-import java.util.*
+/* ktlint-disable no-wildcard-imports */
+import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
+/* ktlint-enable no-wildcard-imports */
 import java.util.concurrent.BlockingQueue
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 /**
  * A class that holds all the information of a single enemy of the game.
@@ -29,15 +33,24 @@ class Enemy(
     val weight = Require.Stat(weight, "Weight") atLeast 1
 
     override fun equals(other: Any?) = when {
-        this === other                 -> true
-        other !is Enemy                -> false
+        this === other -> true
+        other !is Enemy -> false
         hashCode() != other.hashCode() -> false
-        name != other.name             -> false
-        weight != other.weight         -> false
-        maxHp != other.maxHp           -> false
-        defense != other.defense       -> false
-        else                           -> true
+        name != other.name -> false
+        weight != other.weight -> false
+        maxHp != other.maxHp -> false
+        defense != other.defense -> false
+        else -> true
     }
 
     override fun hashCode() = Objects.hash(Enemy::class, name, weight, maxHp, defense)
+    override fun toString(): String = "Enemy { name= $name, weight= $weight, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
+    override fun waitTurn() {
+        scheduledExecutor = Executors.newSingleThreadScheduledExecutor()
+        scheduledExecutor.schedule(
+            /* command = */ ::addToQueue,
+            /* delay = */ (this.weight / 10).toLong(),
+            /* unit = */ TimeUnit.SECONDS
+        )
+    }
 }
