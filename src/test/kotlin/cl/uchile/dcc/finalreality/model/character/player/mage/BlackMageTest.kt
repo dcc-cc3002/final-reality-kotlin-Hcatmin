@@ -80,7 +80,6 @@ class BlackMageTest : FunSpec({
         b_mage1.waitTurn()
         b_mage1.equip(staff1)
         b_mage1.waitTurn()
-
     }
 
     test("A BlackMage shouldn't equip others weapons") {
@@ -95,6 +94,10 @@ class BlackMageTest : FunSpec({
         }
     }
 
-
+    test("Get the equipped weapon") {
+        b_mage1.equip(axe1)
+        b_mage1.equippedWeapon shouldBe axe1
+        b_mage1.waitTurn()
+    }
 
 })
