@@ -41,16 +41,7 @@ class BlackMage(
     maxMp: Int,
 ) : AbstractMageCharacter(name, maxHp, defense, turnsQueue, maxMp) {
 
-    override val equippedWeapon: GameWeapon
-        get() = _equippedWeapon
 //    source: https://stackoverflow.com/questions/33602705/best-way-to-implement-visitor-pattern-in-kotlin
-    override fun equip(weapon: GameWeapon) {
-    _equippedWeapon = when (weapon) {
-        is Axe -> weapon
-        is Staff -> weapon
-        else -> throw AssertionError(weapon.javaClass)
-    }
-    }
 
     override fun equals(other: Any?) = when {
         this === other -> true
@@ -67,10 +58,11 @@ class BlackMage(
         Objects.hash(BlackMage::class, name, maxHp, maxMp, defense)
 
     override fun toString() = "BlackMage { " +
-        "name: '$name' " +
-        "maxMp: $maxMp, " +
-        "maxHp: $maxHp, " +
-        "defense: $defense, " +
-        "currentMp: $currentMp, " +
+        "name= $name, " +
+        "maxMp= $maxMp, " +
+        "maxHp= $maxHp, " +
+        "defense= $defense, " +
+        "currentMp= $currentMp, " +
+        "currentHp= $currentHp " +
         "}"
 }

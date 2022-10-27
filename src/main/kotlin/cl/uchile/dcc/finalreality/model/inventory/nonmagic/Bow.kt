@@ -29,7 +29,7 @@ class Bow(
     }
 
     override fun toString(): String {
-        return "Bow(name='$name', damage=$damage, weight=$weight)"
+        return "Bow { name= $name, damage= $damage, weight= $weight }"
     }
 
 

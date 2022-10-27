@@ -34,13 +34,6 @@ class Engineer(
     name: String, maxHp: Int, defense: Int,
     turnsQueue: BlockingQueue<GameCharacter>
 ) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = when (weapon) {
-            is Axe -> weapon
-            is Bow -> weapon
-            else -> throw AssertionError(weapon.javaClass)
-        }
-    }
 
     override fun equals(other: Any?) = when {
         this === other -> true
@@ -55,9 +48,6 @@ class Engineer(
     override fun hashCode() =
         Objects.hash(Engineer::class, name, maxHp, defense)
 
-    override fun toString() = "Engineer { " +
-      "name: '$name', " +
-      "maxHp: $maxHp, " +
-      "defense: $defense " +
-      "}"
+    override fun toString() =
+        "Engineer { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
 }

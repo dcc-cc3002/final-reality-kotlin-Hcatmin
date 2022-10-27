@@ -27,7 +27,8 @@ class Sword(
         return result
     }
 
+
     override fun toString(): String {
-        return "Sword(name='$name', damage=$damage, weight=$weight)"
+        return "Sword { name= $name, damage= $damage, weight= $weight }"
     }
 }

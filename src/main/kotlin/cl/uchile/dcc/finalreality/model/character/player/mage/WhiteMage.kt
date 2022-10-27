@@ -54,18 +54,11 @@ class WhiteMage(
 
     override fun hashCode() = Objects.hash(WhiteMage::class, name, maxHp, maxMp, defense)
     override fun toString() = "WhiteMage { " +
-        "name: '$name' " +
-        "maxMp: $maxMp, " +
-        "maxHp: $maxHp, " +
-        "defense: $defense, " +
-        "currentMp: $currentMp, " +
+        "name= $name, " +
+        "maxMp= $maxMp, " +
+        "maxHp= $maxHp, " +
+        "defense= $defense, " +
+        "currentMp= $currentMp, " +
+        "currentHp= $currentHp " +
         "}"
-
-
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = when (weapon) {
-            is Staff -> weapon
-            else -> throw AssertionError(weapon.javaClass)
-        }
-    }
 }

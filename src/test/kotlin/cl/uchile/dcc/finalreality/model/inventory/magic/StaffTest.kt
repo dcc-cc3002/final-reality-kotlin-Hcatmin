@@ -50,5 +50,8 @@ open class StaffTest : FunSpec({
                                        staff1 shouldNot haveSameHashCodeAs(staff3)
                                    }
 
+                                   test("The string representation of a staff should be correct") {
+                                       "$staff1" shouldBe "Staff { name= Staff1, damage= 10, weight= 10, magicdamage= 10 }"
+                                   }
 
                                })

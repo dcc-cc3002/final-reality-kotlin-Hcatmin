@@ -30,6 +30,6 @@ class Staff(
     }
 
     override fun toString(): String {
-        return "Staff(name='$name', damage=$damage, weight=$weight, magicdamage=$magicdamage)"
+        return "Staff { name= $name, damage= $damage, weight= $weight, magicdamage= $magicdamage }"
     }
 }
