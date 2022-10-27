@@ -29,6 +29,6 @@ class Axe(
     }
 
     override fun toString(): String {
-        return "Axe(name='$name', damage=$damage, weight=$weight)"
+        return "Axe { name= $name, damage= $damage, weight= $weight }"
     }
 }

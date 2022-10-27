@@ -35,15 +35,6 @@ abstract class AbstractMageCharacter(
     maxMp: Int,
 ) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
-    override fun waitTurn() {
-        scheduledExecutor = Executors.newSingleThreadScheduledExecutor()
-        scheduledExecutor.schedule(
-            /* command = */ ::addToQueue,
-            /* delay = */ (this.equippedWeapon.weight / 10).toLong(),
-            /* unit = */ TimeUnit.SECONDS
-        )
-    }
-
     val maxMp = Require.Stat(maxMp, "Max MP") atLeast 0
     var currentMp: Int = maxMp
         set(value) {
