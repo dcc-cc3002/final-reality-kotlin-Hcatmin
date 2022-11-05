@@ -5,10 +5,17 @@
  * You should have received a copy of the license along with this
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
-package cl.uchile.dcc.finalreality.model.character.player
+package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import java.util.*
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Axe
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Knife
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Sword
+import java.lang.AssertionError
+/* ktlint-disable no-wildcard-imports */
+import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
+/* ktlint-enable no-wildcard-imports */
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -27,25 +34,31 @@ import java.util.concurrent.BlockingQueue
  * @author ~Your name~
  */
 class Knight(
-    name: String, maxHp: Int, defense: Int,
+    name: String,
+    maxHp: Int,
+    defense: Int,
     turnsQueue: BlockingQueue<GameCharacter>
 ) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
+    override fun equip(weapon: GameWeapon) {
+        _equippedWeapon = when (weapon) {
+            is Axe -> weapon
+            is Knife -> weapon
+            is Sword -> weapon
+            else -> throw AssertionError(weapon.javaClass)
+        }
+    }
     override fun equals(other: Any?) = when {
-        this === other                 -> true
-        other !is Knight               -> false
+        this === other -> true
+        other !is Knight -> false
         hashCode() != other.hashCode() -> false
-        name != other.name             -> false
-        maxHp != other.maxHp           -> false
-        defense != other.defense       -> false
-        else                           -> true
+        name != other.name -> false
+        maxHp != other.maxHp -> false
+        defense != other.defense -> false
+        else -> true
     }
 
     override fun hashCode() = Objects.hash(Knight::class, name, maxHp, defense)
 
-    override fun toString() = "Knight { " +
-      "name: '$name', " +
-      "maxHp: $maxHp, " +
-      "defense: $defense, " +
-      "currentHp: $currentHp " +
-      "}"
+    override fun toString() =
+        "Knight { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
 }
