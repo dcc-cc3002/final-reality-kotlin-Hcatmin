@@ -22,9 +22,9 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.util.concurrent.LinkedBlockingQueue
 
-lateinit var thief1 : Thief
-lateinit var thief2 : Thief
-lateinit var thief3 : Thief
+lateinit var thief1: Thief
+lateinit var thief2: Thief
+lateinit var thief3: Thief
 
 fun setUpThief() {
     val queueAll = LinkedBlockingQueue<GameCharacter>()
@@ -45,41 +45,44 @@ class ThiefTest : FunSpec({
     }
 
     test("Thief should be equal to itself") {
-      thief1 shouldBeSameInstanceAs thief1
-      thief1 shouldBe thief1
+        thief1 shouldBeSameInstanceAs thief1
+        thief1 shouldBe thief1
     }
 
     test("A Thief is not equal to one of a different class") {
-      thief1 shouldNotBe "$thief1"
+        thief1 shouldNotBe "$thief1"
     }
 
     test("Two Thiefs with the same name should be equal") {
-      thief1 shouldNotBeSameInstanceAs thief2
-      thief1 shouldBe thief2
+        thief1 shouldNotBeSameInstanceAs thief2
+        thief1 shouldBe thief2
     }
 
     test("Two Thiefs with different names should not be equal") {
-      thief1 shouldNotBe thief3
+        thief1 shouldNotBe thief3
     }
 
     test("Two Thiefs with the same name should have the same hashcode") {
-      thief1 should haveSameHashCodeAs(thief2)
+        thief1 should haveSameHashCodeAs(thief2)
     }
 
     test("Two Thiefs with different names should have different hashcode") {
-      thief1 shouldNot haveSameHashCodeAs(thief3)
+        thief1 shouldNot haveSameHashCodeAs(thief3)
     }
 
     test("The string representation of a thief should be correct") {
-      "$thief1" shouldBe "Thief { name= Thief1, maxHp= 10, defense= 10, currentHp= 10 }"
+        "$thief1" shouldBe "Thief { name= Thief1, maxHp= 10, defense= 10, currentHp= 10 }"
     }
 
     test("A Thief should equip a Bow, a Knife and a Sword") {
         thief1.equip(bow1)
+        thief1.equippedWeapon shouldBe bow1
         thief1.waitTurn()
         thief1.equip(knife1)
+        thief1.equippedWeapon shouldBe knife1
         thief1.waitTurn()
         thief1.equip(sword1)
+        thief1.equippedWeapon shouldBe sword1
         thief1.waitTurn()
     }
 

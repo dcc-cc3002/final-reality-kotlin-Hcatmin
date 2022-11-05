@@ -1,15 +1,9 @@
 package cl.uchile.dcc.finalreality.model.character.player.mage
 
 import cl.uchile.dcc.finalreality.exceptions.Require
-import cl.uchile.dcc.finalreality.model.character.AbstractCharacter
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter
 import cl.uchile.dcc.finalreality.model.character.player.melee.AbstractPlayerCharacter
-import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
-import cl.uchile.dcc.finalreality.model.inventory.magic.MagicWeapon
 import java.util.concurrent.BlockingQueue
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 /**
  * A class that holds all the information of a player-controlled mage-character in the game.

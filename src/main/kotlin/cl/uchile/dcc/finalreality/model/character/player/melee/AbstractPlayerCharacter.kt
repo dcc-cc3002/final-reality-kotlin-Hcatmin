@@ -27,7 +27,7 @@ abstract class AbstractPlayerCharacter(
     turnsQueue: BlockingQueue<GameCharacter>
 ) : AbstractCharacter(name, maxHp, defense, turnsQueue), PlayerCharacter {
 
-    lateinit var _equippedWeapon : GameWeapon
+    lateinit var _equippedWeapon: GameWeapon
     override val equippedWeapon: GameWeapon
         get() = _equippedWeapon
 

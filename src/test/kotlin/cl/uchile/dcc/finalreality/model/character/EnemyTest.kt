@@ -10,9 +10,9 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.util.concurrent.LinkedBlockingQueue
 
-lateinit var enemy1 : Enemy
-lateinit var enemy2 : Enemy
-lateinit var enemy3 : Enemy
+lateinit var enemy1: Enemy
+lateinit var enemy2: Enemy
+lateinit var enemy3: Enemy
 
 fun setUpEnemy() {
     val queueEnemy = LinkedBlockingQueue<GameCharacter> ()
@@ -60,5 +60,4 @@ class EnemyTest : FunSpec({
     test("An Enemy should be able to waitTurn") {
         enemy1.waitTurn()
     }
-
 })

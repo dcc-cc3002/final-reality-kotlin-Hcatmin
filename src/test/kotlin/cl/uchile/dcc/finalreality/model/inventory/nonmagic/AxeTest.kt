@@ -10,9 +10,9 @@ import io.kotest.matchers.types.haveSameHashCodeAs
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 
-lateinit var axe1 : Axe
-lateinit var axe2 : Axe
-lateinit var axe3 : Axe
+lateinit var axe1: Axe
+lateinit var axe2: Axe
+lateinit var axe3: Axe
 
 fun setUpAxe() {
     axe1 = Axe("Axe1", 10, 10)
@@ -55,8 +55,4 @@ class AxeTest : FunSpec({
     test("The string representation of a axe should be correct") {
         "$axe1" shouldBe "Axe { name= Axe1, damage= 10, weight= 10 }"
     }
-
-
-
-
-                        })
+})

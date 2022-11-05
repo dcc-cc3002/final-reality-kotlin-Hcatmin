@@ -11,10 +11,8 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import cl.uchile.dcc.finalreality.model.inventory.magic.Staff
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Axe
-import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Knife
-/* ktlint-disable no-wildcard-imports */
-import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
-/* ktlint-enable no-wildcard-imports */
+import java.lang.AssertionError
+import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -43,11 +41,11 @@ class BlackMage(
 
 //    source: https://stackoverflow.com/questions/33602705/best-way-to-implement-visitor-pattern-in-kotlin
     override fun equip(weapon: GameWeapon) {
-    _equippedWeapon = when (weapon) {
-        is Axe -> weapon
-        is Staff -> weapon
-        else -> throw AssertionError(weapon.javaClass)
-    }
+        _equippedWeapon = when (weapon) {
+            is Axe -> weapon
+            is Staff -> weapon
+            else -> throw AssertionError(weapon.javaClass)
+        }
     }
 
     override fun equals(other: Any?) = when {

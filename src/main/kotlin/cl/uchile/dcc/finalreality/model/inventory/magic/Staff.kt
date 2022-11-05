@@ -1,10 +1,10 @@
 package cl.uchile.dcc.finalreality.model.inventory.magic
 
 class Staff(
-            override val name: String,
-            override val damage: Int,
-            override val weight: Int,
-            override val magicdamage: Int
+    override val name: String,
+    override val damage: Int,
+    override val weight: Int,
+    override val magicdamage: Int
 ) : MagicWeapon {
 
     override fun equals(other: Any?): Boolean {

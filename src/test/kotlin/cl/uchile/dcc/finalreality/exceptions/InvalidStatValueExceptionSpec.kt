@@ -9,10 +9,10 @@ class InvalidStatValueExceptionSpec : FunSpec({
     val prefix = "The required condition is not met. "
 
     test("An invalid stat value exception can be thrown with a message.") {
-      checkAll<String> { message ->
-          assertThrows<InvalidStatValueException> {
-              throw InvalidStatValueException(message)
-          }.message shouldBe prefix + message
-      }
+        checkAll<String> { message ->
+            assertThrows<InvalidStatValueException> {
+                throw InvalidStatValueException(message)
+            }.message shouldBe prefix + message
+        }
     }
 })

@@ -23,9 +23,9 @@ import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.lang.AssertionError
 import java.util.concurrent.LinkedBlockingQueue
 
-lateinit var b_mage1 : BlackMage
-lateinit var b_mage2 : BlackMage
-lateinit var b_mage3 : BlackMage
+lateinit var b_mage1: BlackMage
+lateinit var b_mage2: BlackMage
+lateinit var b_mage3: BlackMage
 
 fun setUpBlackMage() {
     val queueAll = LinkedBlockingQueue<GameCharacter>()
@@ -46,39 +46,41 @@ class BlackMageTest : FunSpec({
     }
 
     test("BlackMage should be equal to itself") {
-      b_mage1 shouldBeSameInstanceAs b_mage1
-      b_mage1 shouldBe b_mage1
+        b_mage1 shouldBeSameInstanceAs b_mage1
+        b_mage1 shouldBe b_mage1
     }
 
     test("A BlackMage is not equal to one of a different class") {
-      b_mage1 shouldNotBe "$b_mage1"
+        b_mage1 shouldNotBe "$b_mage1"
     }
 
     test("Two BlackMages with the same name should be equal") {
-      b_mage1 shouldNotBeSameInstanceAs b_mage2
-      b_mage1 shouldBe b_mage2
+        b_mage1 shouldNotBeSameInstanceAs b_mage2
+        b_mage1 shouldBe b_mage2
     }
 
     test("Two BlackMages with different names should not be equal") {
-      b_mage1 shouldNotBe b_mage3
+        b_mage1 shouldNotBe b_mage3
     }
 
     test("Two BlackMages with the same name should have the same hashcode") {
-      b_mage1 should haveSameHashCodeAs(b_mage2)
+        b_mage1 should haveSameHashCodeAs(b_mage2)
     }
 
     test("Two BlackMages with different names should have different hashcode") {
-      b_mage1 shouldNot haveSameHashCodeAs(b_mage3)
+        b_mage1 shouldNot haveSameHashCodeAs(b_mage3)
     }
 
     test("The string representation of a b_mage should be correct") {
-      "$b_mage1" shouldBe "BlackMage { name= BlackMage1, maxMp= 10, maxHp= 10, defense= 10, currentMp= 10, currentHp= 10 }"
+        "$b_mage1" shouldBe "BlackMage { name= BlackMage1, maxMp= 10, maxHp= 10, defense= 10, currentMp= 10, currentHp= 10 }"
     }
 
     test("A BlackMage should equip an Axe and a Staff") {
         b_mage1.equip(axe1)
+        b_mage1.equippedWeapon shouldBe axe1
         b_mage1.waitTurn()
         b_mage1.equip(staff1)
+        b_mage1.equippedWeapon shouldBe staff1
         b_mage1.waitTurn()
     }
 
@@ -92,12 +94,6 @@ class BlackMageTest : FunSpec({
         shouldThrow<AssertionError> {
             b_mage1.equip(sword1)
         }
-    }
-
-    test("Get the equipped weapon") {
-        b_mage1.equip(axe1)
-        b_mage1.equippedWeapon shouldBe axe1
-        b_mage1.waitTurn()
     }
 
 })

@@ -9,12 +9,9 @@ package cl.uchile.dcc.finalreality.model.character.player.mage
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
-import cl.uchile.dcc.finalreality.model.inventory.magic.MagicWeapon
 import cl.uchile.dcc.finalreality.model.inventory.magic.Staff
 import java.lang.AssertionError
-/* ktlint-disable no-wildcard-imports */
-import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
-/* ktlint-enable no-wildcard-imports */
+import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -61,7 +58,6 @@ class WhiteMage(
         "currentMp= $currentMp, " +
         "currentHp= $currentHp " +
         "}"
-
 
     override fun equip(weapon: GameWeapon) {
         _equippedWeapon = when (weapon) {

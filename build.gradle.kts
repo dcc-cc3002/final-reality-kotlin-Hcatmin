@@ -25,16 +25,15 @@ dependencies {
     testImplementation(
         "io.kotest:kotest-runner-junit5-jvm:5.5.1"
     )
-    
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-//tasks.withType<Test>().configureEach {
+// tasks.withType<Test>().configureEach {
 //    useJUnitPlatform()
-//}
+// }
 
 configure<KtlintExtension> {
     verbose.set(true)

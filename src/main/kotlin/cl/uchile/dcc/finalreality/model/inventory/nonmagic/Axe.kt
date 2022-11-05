@@ -6,7 +6,7 @@ class Axe(
     override val name: String,
     override val damage: Int,
     override val weight: Int
-    ) : GameWeapon {
+) : GameWeapon {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

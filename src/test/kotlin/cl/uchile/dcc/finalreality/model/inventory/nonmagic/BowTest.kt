@@ -10,9 +10,9 @@ import io.kotest.matchers.types.haveSameHashCodeAs
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 
-lateinit var bow1 : Bow
-lateinit var bow2 : Bow
-lateinit var bow3 : Bow
+lateinit var bow1: Bow
+lateinit var bow2: Bow
+lateinit var bow3: Bow
 
 fun setUpBow() {
     bow1 = Bow("Bow1", 10, 10)
@@ -55,8 +55,4 @@ class BowTest : FunSpec({
     test("The string representation of a bow should be correct") {
         "$bow1" shouldBe "Bow { name= Bow1, damage= 10, weight= 10 }"
     }
-
-
-
-
-                        })
+})

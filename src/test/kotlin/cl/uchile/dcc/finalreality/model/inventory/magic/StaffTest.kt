@@ -9,7 +9,6 @@ import io.kotest.matchers.types.haveSameHashCodeAs
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 
-
 lateinit var staff1: Staff
 lateinit var staff2: Staff
 lateinit var staff3: Staff
@@ -22,36 +21,35 @@ fun setUpStaff() {
 
 open class StaffTest : FunSpec({
     beforeEach {
-       setUpStaff()
+        setUpStaff()
     }
     test("Staff should be equal to itself") {
-       staff1 shouldBeSameInstanceAs staff1
-       staff1 shouldBe staff1
+        staff1 shouldBeSameInstanceAs staff1
+        staff1 shouldBe staff1
     }
 
     test("A Staff is not equal to one of a different class") {
-       staff1 shouldNotBe "$staff1"
+        staff1 shouldNotBe "$staff1"
     }
 
     test("Two Staffs with the same name should be equal") {
-       staff1 shouldNotBeSameInstanceAs staff2
-       staff1 shouldBe staff2
+        staff1 shouldNotBeSameInstanceAs staff2
+        staff1 shouldBe staff2
     }
 
     test("Two Staffs with different names should not be equal") {
-       staff1 shouldNotBe staff3
+        staff1 shouldNotBe staff3
     }
 
     test("Two Staffs with the same name should have the same hashcode") {
-       staff1 should haveSameHashCodeAs(staff2)
+        staff1 should haveSameHashCodeAs(staff2)
     }
 
     test("Two Staffs with different names should have different hashcode") {
-       staff1 shouldNot haveSameHashCodeAs(staff3)
+        staff1 shouldNot haveSameHashCodeAs(staff3)
     }
 
     test("The string representation of a staff should be correct") {
         "$staff1" shouldBe "Staff { name= Staff1, damage= 10, weight= 10, magicdamage= 10 }"
     }
-
 })

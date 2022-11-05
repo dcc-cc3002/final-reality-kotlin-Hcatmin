@@ -9,7 +9,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
-fun currentMpTesting(mage : AbstractMageCharacter) {
+fun currentMpTesting(mage: AbstractMageCharacter) {
     mage.currentMp = 0
     mage.currentMp shouldNotBe mage.maxMp
     mage.currentMp = mage.maxMp

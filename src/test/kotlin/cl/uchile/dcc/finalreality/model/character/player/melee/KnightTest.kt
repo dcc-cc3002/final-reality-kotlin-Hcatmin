@@ -23,9 +23,9 @@ import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.lang.AssertionError
 import java.util.concurrent.LinkedBlockingQueue
 
-lateinit var knight1 : Knight
-lateinit var knight2 : Knight
-lateinit var knight3 : Knight
+lateinit var knight1: Knight
+lateinit var knight2: Knight
+lateinit var knight3: Knight
 
 fun setUpKnight() {
     val queueAll = LinkedBlockingQueue<GameCharacter>()
@@ -46,41 +46,44 @@ class KnightTest : FunSpec({
     }
 
     test("Knight should be equal to itself") {
-      knight1 shouldBeSameInstanceAs knight1
-      knight1 shouldBe knight1
+        knight1 shouldBeSameInstanceAs knight1
+        knight1 shouldBe knight1
     }
 
     test("A Knight is not equal to one of a different class") {
-      knight1 shouldNotBe "$knight1"
+        knight1 shouldNotBe "$knight1"
     }
 
     test("Two Knights with the same name should be equal") {
-      knight1 shouldNotBeSameInstanceAs knight2
-      knight1 shouldBe knight2
+        knight1 shouldNotBeSameInstanceAs knight2
+        knight1 shouldBe knight2
     }
 
     test("Two Knights with different names should not be equal") {
-      knight1 shouldNotBe knight3
+        knight1 shouldNotBe knight3
     }
 
     test("Two Knights with the same name should have the same hashcode") {
-      knight1 should haveSameHashCodeAs(knight2)
+        knight1 should haveSameHashCodeAs(knight2)
     }
 
     test("Two Knights with different names should have different hashcode") {
-      knight1 shouldNot haveSameHashCodeAs(knight3)
+        knight1 shouldNot haveSameHashCodeAs(knight3)
     }
 
     test("The string representation of a knight should be correct") {
-      "$knight1" shouldBe "Knight { name= Knight1, maxHp= 10, defense= 10, currentHp= 10 }"
+        "$knight1" shouldBe "Knight { name= Knight1, maxHp= 10, defense= 10, currentHp= 10 }"
     }
 
     test("A Knight should equip an Axe, a Knife and a Sword") {
         knight1.equip(axe1)
+        knight1.equippedWeapon shouldBe axe1
         knight1.waitTurn()
         knight1.equip(knife1)
+        knight1.equippedWeapon shouldBe knife1
         knight1.waitTurn()
         knight1.equip(sword1)
+        knight1.equippedWeapon shouldBe sword1
         knight1.waitTurn()
     }
 
@@ -92,5 +95,4 @@ class KnightTest : FunSpec({
             knight1.equip(staff1)
         }
     }
-
 })
