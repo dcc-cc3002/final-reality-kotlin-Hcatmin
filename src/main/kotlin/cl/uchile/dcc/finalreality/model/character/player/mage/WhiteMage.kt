@@ -5,11 +5,13 @@
  * You should have received a copy of the license along with this
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
-package cl.uchile.dcc.finalreality.model.character.player
+package cl.uchile.dcc.finalreality.model.character.player.mage
 
-import cl.uchile.dcc.finalreality.exceptions.Require
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import java.util.*
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.magic.Staff
+import java.lang.AssertionError
+import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -29,32 +31,35 @@ import java.util.concurrent.BlockingQueue
  * @author ~Your name~
  */
 class WhiteMage(
-  name: String,
-  maxHp: Int,
-  maxMp: Int,
-  defense: Int,
-  turnsQueue: BlockingQueue<GameCharacter>
-) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
-    val maxMp = Require.Stat(maxMp, "Max MP") atLeast 0
-    var currentMp: Int = maxMp
-        set(value) {
-            field = Require.Stat(value, "Current MP") inRange 0..maxMp
-        }
+    name: String,
+    maxHp: Int,
+    defense: Int,
+    turnsQueue: BlockingQueue<GameCharacter>,
+    maxMp: Int,
+) : AbstractMageCharacter(name, maxHp, defense, turnsQueue, maxMp) {
 
     override fun equals(other: Any?) = when {
-        this === other                 -> true
-        other !is WhiteMage            -> false
+        this === other -> true
+        other !is WhiteMage -> false
         hashCode() != other.hashCode() -> false
-        name != other.name             -> false
-        maxHp != other.maxHp           -> false
-        maxMp != other.maxMp           -> false
-        defense != other.defense       -> false
-        else                           -> true
+        name != other.name -> false
+        maxHp != other.maxHp -> false
+        maxMp != other.maxMp -> false
+        defense != other.defense -> false
+        else -> true
     }
 
     override fun hashCode() = Objects.hash(WhiteMage::class, name, maxHp, maxMp, defense)
+    override fun toString() = "WhiteMage { " +
+        "name= $name, " +
+        "maxMp= $maxMp, " +
+        "maxHp= $maxHp, " +
+        "defense= $defense, " +
+        "currentMp= $currentMp, " +
+        "currentHp= $currentHp " +
+        "}"
 
-    override fun toString() =
-      "WhiteMage(currentMp=$currentMp, maxMp=$maxMp, maxHp=$maxHp, currentHp=$currentHp, " +
-        "defense=$defense, name='$name')"
+    override fun equip(weapon: GameWeapon) {
+        _equippedWeapon = weapon.isEquipped(this);
+    }
 }

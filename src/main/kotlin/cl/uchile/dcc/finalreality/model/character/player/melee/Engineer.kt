@@ -5,9 +5,10 @@
  * You should have received a copy of the license along with this
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
-package cl.uchile.dcc.finalreality.model.character.player
+package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -27,27 +28,29 @@ import java.util.concurrent.BlockingQueue
  * @author ~Your name~
  */
 class Engineer(
-    name: String, maxHp: Int, defense: Int,
+    name: String,
+    maxHp: Int,
+    defense: Int,
     turnsQueue: BlockingQueue<GameCharacter>
-) :
-    AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
+) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
     override fun equals(other: Any?) = when {
-        this === other                 -> true
-        other !is Engineer             -> false
+        this === other -> true
+        other !is Engineer -> false
         hashCode() != other.hashCode() -> false
-        name != other.name             -> false
-        maxHp != other.maxHp           -> false
-        defense != other.defense       -> false
-        else                           -> true
+        name != other.name -> false
+        maxHp != other.maxHp -> false
+        defense != other.defense -> false
+        else -> true
     }
 
     override fun hashCode() =
         Objects.hash(Engineer::class, name, maxHp, defense)
 
-    override fun toString() = "Engineer { " +
-      "name: '$name', " +
-      "maxHp: $maxHp, " +
-      "defense: $defense " +
-      "}"
+    override fun toString() =
+        "Engineer { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
+
+    override fun equip(weapon: GameWeapon) {
+        _equippedWeapon = weapon.isEquipped(this)
+    }
 }

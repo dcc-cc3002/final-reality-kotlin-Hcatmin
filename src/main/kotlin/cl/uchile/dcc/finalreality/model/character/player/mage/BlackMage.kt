@@ -5,11 +5,11 @@
  * You should have received a copy of the license along with this
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
-package cl.uchile.dcc.finalreality.model.character.player
+package cl.uchile.dcc.finalreality.model.character.player.mage
 
-import cl.uchile.dcc.finalreality.exceptions.Require
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import java.util.*
+import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -31,35 +31,37 @@ import java.util.concurrent.BlockingQueue
 class BlackMage(
     name: String,
     maxHp: Int,
-    maxMp: Int,
     defense: Int,
-    turnsQueue: BlockingQueue<GameCharacter>
-) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
-    val maxMp = Require.Stat(maxMp, "Max MP") atLeast 0
-    var currentMp: Int = maxMp
-        set(value) {
-            field = Require.Stat(value, "Current MP") inRange 0..maxMp
-        }
+    turnsQueue: BlockingQueue<GameCharacter>,
+    maxMp: Int,
+) : AbstractMageCharacter(name, maxHp, defense, turnsQueue, maxMp) {
+
+//    source: https://stackoverflow.com/questions/33602705/best-way-to-implement-visitor-pattern-in-kotlin
 
     override fun equals(other: Any?) = when {
-        this === other                 -> true
-        other !is BlackMage            -> false
+        this === other -> true
+        other !is BlackMage -> false
         hashCode() != other.hashCode() -> false
-        name != other.name             -> false
-        maxHp != other.maxHp           -> false
-        maxMp != other.maxMp           -> false
-        defense != other.defense       -> false
-        else                           -> true
+        name != other.name -> false
+        maxHp != other.maxHp -> false
+        maxMp != other.maxMp -> false
+        defense != other.defense -> false
+        else -> true
     }
 
     override fun hashCode() =
         Objects.hash(BlackMage::class, name, maxHp, maxMp, defense)
 
     override fun toString() = "BlackMage { " +
-      "name: '$name' " +
-      "maxMp: $maxMp, " +
-      "maxHp: $maxHp, " +
-      "defense: $defense, " +
-      "currentMp: $currentMp, " +
-      "}"
+        "name= $name, " +
+        "maxMp= $maxMp, " +
+        "maxHp= $maxHp, " +
+        "defense= $defense, " +
+        "currentMp= $currentMp, " +
+        "currentHp= $currentHp " +
+        "}"
+
+    override fun equip(weapon: GameWeapon) {
+        _equippedWeapon = weapon.isEquipped(this)
+    }
 }
