@@ -9,9 +9,6 @@ package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
-import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Axe
-import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Bow
-import java.lang.AssertionError
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -36,13 +33,6 @@ class Engineer(
     defense: Int,
     turnsQueue: BlockingQueue<GameCharacter>
 ) : AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = when (weapon) {
-            is Axe -> weapon
-            is Bow -> weapon
-            else -> throw AssertionError(weapon.javaClass)
-        }
-    }
 
     override fun equals(other: Any?) = when {
         this === other -> true
@@ -59,4 +49,8 @@ class Engineer(
 
     override fun toString() =
         "Engineer { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
+
+    override fun equip(weapon: GameWeapon) {
+        _equippedWeapon = weapon.isEquipped(this)
+    }
 }

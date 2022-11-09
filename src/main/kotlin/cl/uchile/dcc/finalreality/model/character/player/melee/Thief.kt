@@ -40,14 +40,6 @@ class Thief(
 ) :
     AbstractPlayerCharacter(name, maxHp, defense, turnsQueue) {
 
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = when (weapon) {
-            is Bow -> weapon
-            is Knife -> weapon
-            is Sword -> weapon
-            else -> throw AssertionError(weapon.javaClass)
-        }
-    }
     override fun equals(other: Any?) = when {
         this === other -> true
         other !is Thief -> false
@@ -62,4 +54,8 @@ class Thief(
 
     override fun toString() =
         "Thief { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
+
+    override fun equip(weapon: GameWeapon) {
+        _equippedWeapon = weapon.isEquipped(this);
+    }
 }

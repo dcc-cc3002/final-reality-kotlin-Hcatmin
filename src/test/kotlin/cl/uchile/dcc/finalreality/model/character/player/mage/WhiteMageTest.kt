@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.character.player.mage
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.magic.setUpStaff
 import cl.uchile.dcc.finalreality.model.inventory.magic.staff1
+import cl.uchile.dcc.finalreality.model.inventory.magic.staff3
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.axe1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.bow1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.knife1
@@ -23,15 +24,15 @@ import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.lang.AssertionError
 import java.util.concurrent.LinkedBlockingQueue
 
+val queueWMage = LinkedBlockingQueue<GameCharacter>()
 lateinit var w_mage1: WhiteMage
 lateinit var w_mage2: WhiteMage
 lateinit var w_mage3: WhiteMage
 
 fun setUpWhiteMage() {
-    val queueAll = LinkedBlockingQueue<GameCharacter>()
-    w_mage1 = WhiteMage("WhiteMage1", 10, 10, queueAll, 10)
-    w_mage2 = WhiteMage("WhiteMage1", 10, 10, queueAll, 10)
-    w_mage3 = WhiteMage("WhiteMage3", 15, 15, queueAll, 15)
+    w_mage1 = WhiteMage("WhiteMage1", 10, 10, queueWMage, 10)
+    w_mage2 = WhiteMage("WhiteMage1", 10, 10, queueWMage, 10)
+    w_mage3 = WhiteMage("WhiteMage3", 15, 15, queueWMage, 15)
 }
 
 class WhiteMageTest : FunSpec({
@@ -94,5 +95,14 @@ class WhiteMageTest : FunSpec({
         shouldThrow<AssertionError> {
             w_mage1.equip(sword1)
         }
+    }
+    test("pop the names of the character of the queue in the correct order") {
+        w_mage1.equip(staff1)
+        w_mage1.waitTurn()
+        w_mage2.equip(staff3)
+        w_mage2.waitTurn()
+        Thread.sleep(6000)
+        queueWMage.poll() == w_mage1
+        queueWMage.poll() == w_mage2
     }
 })

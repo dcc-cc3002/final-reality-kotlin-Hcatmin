@@ -60,9 +60,6 @@ class WhiteMage(
         "}"
 
     override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = when (weapon) {
-            is Staff -> weapon
-            else -> throw AssertionError(weapon.javaClass)
-        }
+        _equippedWeapon = weapon.isEquipped(this);
     }
 }

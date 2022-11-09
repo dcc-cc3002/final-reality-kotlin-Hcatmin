@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.character.player.mage
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.magic.setUpStaff
 import cl.uchile.dcc.finalreality.model.inventory.magic.staff1
+import cl.uchile.dcc.finalreality.model.inventory.magic.staff3
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.axe1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.bow1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.knife1
@@ -23,15 +24,15 @@ import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.lang.AssertionError
 import java.util.concurrent.LinkedBlockingQueue
 
+val queueBMage = LinkedBlockingQueue<GameCharacter>()
 lateinit var b_mage1: BlackMage
 lateinit var b_mage2: BlackMage
 lateinit var b_mage3: BlackMage
 
 fun setUpBlackMage() {
-    val queueAll = LinkedBlockingQueue<GameCharacter>()
-    b_mage1 = BlackMage("BlackMage1", 10, 10, queueAll, 10)
-    b_mage2 = BlackMage("BlackMage1", 10, 10, queueAll, 10)
-    b_mage3 = BlackMage("BlackMage3", 15, 15, queueAll, 15)
+    b_mage1 = BlackMage("BlackMage1", 10, 10, queueBMage, 10)
+    b_mage2 = BlackMage("BlackMage1", 10, 10, queueBMage, 10)
+    b_mage3 = BlackMage("BlackMage3", 15, 15, queueBMage, 15)
 }
 
 class BlackMageTest : FunSpec({
@@ -76,8 +77,8 @@ class BlackMageTest : FunSpec({
     }
 
     test("A BlackMage should equip an Axe and a Staff") {
-        b_mage1.equip(axe1)
-        b_mage1.equippedWeapon shouldBe axe1
+        b_mage1.equip(knife1)
+        b_mage1.equippedWeapon shouldBe knife1
         b_mage1.waitTurn()
         b_mage1.equip(staff1)
         b_mage1.equippedWeapon shouldBe staff1
@@ -86,14 +87,23 @@ class BlackMageTest : FunSpec({
 
     test("A BlackMage shouldn't equip others weapons") {
         shouldThrow<AssertionError> {
-            b_mage1.equip(bow1)
+            b_mage1.equip(axe1)
         }
         shouldThrow<AssertionError> {
-            b_mage1.equip(knife1)
+            b_mage1.equip(bow1)
         }
         shouldThrow<AssertionError> {
             b_mage1.equip(sword1)
         }
     }
 
+    test("pop the names of the character of the queue in the correct order") {
+        b_mage1.equip(staff1)
+        b_mage1.waitTurn()
+        b_mage2.equip(staff3)
+        b_mage2.waitTurn()
+        Thread.sleep(6000)
+        queueBMage.poll() shouldBe b_mage1
+        queueBMage.poll() shouldBe b_mage2
+    }
 })

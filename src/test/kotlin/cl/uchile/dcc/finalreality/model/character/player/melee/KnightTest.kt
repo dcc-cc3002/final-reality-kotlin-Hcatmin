@@ -23,15 +23,15 @@ import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.lang.AssertionError
 import java.util.concurrent.LinkedBlockingQueue
 
+val queueKnight = LinkedBlockingQueue<GameCharacter>()
 lateinit var knight1: Knight
 lateinit var knight2: Knight
 lateinit var knight3: Knight
 
 fun setUpKnight() {
-    val queueAll = LinkedBlockingQueue<GameCharacter>()
-    knight1 = Knight("Knight1", 10, 10, queueAll)
-    knight2 = Knight("Knight1", 10, 10, queueAll)
-    knight3 = Knight("Knight3", 15, 15, queueAll)
+    knight1 = Knight("Knight1", 10, 10, queueKnight)
+    knight2 = Knight("Knight1", 10, 10, queueKnight)
+    knight3 = Knight("Knight3", 15, 15, queueKnight)
 }
 
 class KnightTest : FunSpec({
@@ -94,5 +94,14 @@ class KnightTest : FunSpec({
         shouldThrow<AssertionError> {
             knight1.equip(staff1)
         }
+    }
+    test("pop the names of the character of the queue in the correct order") {
+        knight1.equip(axe1)
+        knight1.waitTurn()
+        knight2.equip(cl.uchile.dcc.finalreality.model.inventory.nonmagic.axe3)
+        knight2.waitTurn()
+        Thread.sleep(6000)
+        queueKnight.poll() == knight1
+        queueKnight.poll() == knight2
     }
 })

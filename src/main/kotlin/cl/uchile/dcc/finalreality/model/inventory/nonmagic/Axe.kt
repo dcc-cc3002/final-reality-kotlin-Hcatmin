@@ -1,7 +1,26 @@
 package cl.uchile.dcc.finalreality.model.inventory.nonmagic
 
+import cl.uchile.dcc.finalreality.model.character.player.mage.BlackMage
+import cl.uchile.dcc.finalreality.model.character.player.mage.WhiteMage
+import cl.uchile.dcc.finalreality.model.character.player.melee.Engineer
+import cl.uchile.dcc.finalreality.model.character.player.melee.Knight
+import cl.uchile.dcc.finalreality.model.character.player.melee.Thief
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import java.lang.AssertionError
 
+/**
+ * This represents an axe weapon from the game.
+ *
+ * @property name String
+ *     The name of the weapon.
+ * @property damage Int
+ *     The base damage done by the weapon.
+ * @property weight Int
+ *     The weight of the weapon.
+ *
+ * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Your name~
+ */
 class Axe(
     override val name: String,
     override val damage: Int,
@@ -30,5 +49,25 @@ class Axe(
 
     override fun toString(): String {
         return "Axe { name= $name, damage= $damage, weight= $weight }"
+    }
+
+    override fun isEquipped(blackMage: BlackMage): GameWeapon {
+        throw AssertionError(this.javaClass)
+    }
+
+    override fun isEquipped(engineer: Engineer): GameWeapon {
+        return this
+    }
+
+    override fun isEquipped(knight: Knight): GameWeapon {
+        return this
+    }
+
+    override fun isEquipped(thief: Thief): GameWeapon {
+        throw AssertionError(this.javaClass)
+    }
+
+    override fun isEquipped(whiteMage: WhiteMage): GameWeapon {
+        throw AssertionError(this.javaClass)
     }
 }

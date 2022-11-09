@@ -6,6 +6,7 @@ import cl.uchile.dcc.finalreality.model.inventory.magic.staff1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.axe1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.bow1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.knife1
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.knife3
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.setUpAxe
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.setUpBow
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.setUpKnife
@@ -22,15 +23,15 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.util.concurrent.LinkedBlockingQueue
 
+val queueThief = LinkedBlockingQueue<GameCharacter>()
 lateinit var thief1: Thief
 lateinit var thief2: Thief
 lateinit var thief3: Thief
 
 fun setUpThief() {
-    val queueAll = LinkedBlockingQueue<GameCharacter>()
-    thief1 = Thief("Thief1", 10, 10, queueAll)
-    thief2 = Thief("Thief1", 10, 10, queueAll)
-    thief3 = Thief("Thief3", 15, 15, queueAll)
+    thief1 = Thief("Thief1", 10, 10, queueThief)
+    thief2 = Thief("Thief1", 10, 10, queueThief)
+    thief3 = Thief("Thief3", 15, 15, queueThief)
 }
 
 class ThiefTest : FunSpec({
@@ -93,5 +94,15 @@ class ThiefTest : FunSpec({
         shouldThrow<AssertionError> {
             thief1.equip(staff1)
         }
+    }
+
+    test("pop the names of the character of the queue in the correct order") {
+        thief1.equip(knife1)
+        thief1.waitTurn()
+        thief2.equip(knife3)
+        thief2.waitTurn()
+        Thread.sleep(6000)
+        queueThief.poll() == thief1
+        queueThief.poll() == thief2
     }
 })

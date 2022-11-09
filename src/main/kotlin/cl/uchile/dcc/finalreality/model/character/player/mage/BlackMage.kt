@@ -9,9 +9,6 @@ package cl.uchile.dcc.finalreality.model.character.player.mage
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
-import cl.uchile.dcc.finalreality.model.inventory.magic.Staff
-import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Axe
-import java.lang.AssertionError
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -40,13 +37,6 @@ class BlackMage(
 ) : AbstractMageCharacter(name, maxHp, defense, turnsQueue, maxMp) {
 
 //    source: https://stackoverflow.com/questions/33602705/best-way-to-implement-visitor-pattern-in-kotlin
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = when (weapon) {
-            is Axe -> weapon
-            is Staff -> weapon
-            else -> throw AssertionError(weapon.javaClass)
-        }
-    }
 
     override fun equals(other: Any?) = when {
         this === other -> true
@@ -70,4 +60,8 @@ class BlackMage(
         "currentMp= $currentMp, " +
         "currentHp= $currentHp " +
         "}"
+
+    override fun equip(weapon: GameWeapon) {
+        _equippedWeapon = weapon.isEquipped(this)
+    }
 }

@@ -10,15 +10,19 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.util.concurrent.LinkedBlockingQueue
 
+val queueEnemy = LinkedBlockingQueue<GameCharacter> ()
 lateinit var enemy1: Enemy
 lateinit var enemy2: Enemy
 lateinit var enemy3: Enemy
 
 fun setUpEnemy() {
-    val queueEnemy = LinkedBlockingQueue<GameCharacter> ()
     enemy1 = Enemy("Enemy1", 5, 10, 10, queueEnemy)
+    enemy1.waitTurn()
     enemy2 = Enemy("Enemy1", 5, 10, 10, queueEnemy)
-    enemy3 = Enemy("Enemy3", 10, 17, 17, queueEnemy)
+    enemy2.waitTurn()
+    enemy3 = Enemy("Enemy3", 3, 17, 17, queueEnemy)
+    enemy3.waitTurn()
+    Thread.sleep(6000)
 }
 
 class EnemyTest : FunSpec({
@@ -59,5 +63,16 @@ class EnemyTest : FunSpec({
 
     test("An Enemy should be able to waitTurn") {
         enemy1.waitTurn()
+    }
+    test("pop the names of the character of the queue in the correct order") {
+        val queueEnemy2 = LinkedBlockingQueue<GameCharacter> ()
+        val enemy4 = Enemy("Enemy", 10, 17, 17, queueEnemy2)
+        enemy4.waitTurn()
+        val enemy5 = Enemy("Enemy", 5, 17, 17, queueEnemy2)
+        enemy5.waitTurn()
+        Thread.sleep(6000)
+
+        queueEnemy2.poll() shouldBe enemy5
+        queueEnemy2.poll() shouldBe enemy4
     }
 })

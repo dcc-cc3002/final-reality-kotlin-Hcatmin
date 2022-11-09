@@ -4,6 +4,7 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.magic.setUpStaff
 import cl.uchile.dcc.finalreality.model.inventory.magic.staff1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.axe1
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.axe3
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.bow1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.knife1
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.setUpAxe
@@ -23,15 +24,15 @@ import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import java.lang.AssertionError
 import java.util.concurrent.LinkedBlockingQueue
 
+val queueEngineer = LinkedBlockingQueue<GameCharacter>()
 lateinit var engineer1: Engineer
 lateinit var engineer2: Engineer
 lateinit var engineer3: Engineer
 
 fun setUpEngineer() {
-    val queueAll = LinkedBlockingQueue<GameCharacter>()
-    engineer1 = Engineer("Engineer1", 10, 10, queueAll)
-    engineer2 = Engineer("Engineer1", 10, 10, queueAll)
-    engineer3 = Engineer("Engineer3", 15, 15, queueAll)
+    engineer1 = Engineer("Engineer1", 10, 10, queueEngineer)
+    engineer2 = Engineer("Engineer1", 10, 10, queueEngineer)
+    engineer3 = Engineer("Engineer3", 15, 15, queueEngineer)
 }
 
 class EngineerTest : FunSpec({
@@ -94,5 +95,15 @@ class EngineerTest : FunSpec({
         shouldThrow<AssertionError> {
             engineer1.equip(sword1)
         }
+    }
+
+    test("pop the names of the character of the queue in the correct order") {
+        engineer1.equip(axe1)
+        engineer1.waitTurn()
+        engineer2.equip(axe3)
+        engineer2.waitTurn()
+        Thread.sleep(6000)
+        queueEngineer.poll() == engineer1
+        queueEngineer.poll() == engineer2
     }
 })
