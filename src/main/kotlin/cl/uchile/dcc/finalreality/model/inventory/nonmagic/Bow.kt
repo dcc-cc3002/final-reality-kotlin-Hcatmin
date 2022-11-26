@@ -1,13 +1,8 @@
 package cl.uchile.dcc.finalreality.model.inventory.nonmagic
 
-import cl.uchile.dcc.finalreality.model.character.player.mage.BlackMage
-import cl.uchile.dcc.finalreality.model.character.player.mage.WhiteMage
 import cl.uchile.dcc.finalreality.model.character.player.melee.Engineer
-import cl.uchile.dcc.finalreality.model.character.player.melee.Knight
 import cl.uchile.dcc.finalreality.model.character.player.melee.Thief
-import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
-import java.lang.AssertionError
-
+import cl.uchile.dcc.finalreality.model.inventory.AbstractWeapon
 
 /**
  * This represents a bow weapon from the game.
@@ -26,7 +21,7 @@ class Bow(
     override val name: String,
     override val damage: Int,
     override val weight: Int
-) : GameWeapon {
+) : AbstractWeapon(name, damage, weight) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -52,23 +47,11 @@ class Bow(
         return "Bow { name= $name, damage= $damage, weight= $weight }"
     }
 
-    override fun isEquipped(blackMage: BlackMage): GameWeapon {
-        throw AssertionError(this.javaClass)
+    override fun equipToEngineer(engineer: Engineer) {
+        engineer.equipBow(this)
     }
 
-    override fun isEquipped(engineer: Engineer): GameWeapon {
-        return this
-    }
-
-    override fun isEquipped(knight: Knight): GameWeapon {
-        throw AssertionError(this.javaClass)
-    }
-
-    override fun isEquipped(thief: Thief): GameWeapon {
-        return this
-    }
-
-    override fun isEquipped(whiteMage: WhiteMage): GameWeapon {
-        throw AssertionError(this.javaClass)
+    override fun equipToThief(thief: Thief) {
+        thief.equipBow(this)
     }
 }

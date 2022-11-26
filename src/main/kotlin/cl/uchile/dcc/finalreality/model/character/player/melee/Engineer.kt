@@ -8,7 +8,9 @@
 package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.Weapon
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Axe
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Bow
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -50,7 +52,15 @@ class Engineer(
     override fun toString() =
         "Engineer { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
 
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = weapon.isEquipped(this)
+    override fun equip(weapon: Weapon) {
+        weapon.equipToEngineer(this)
+    }
+
+    override fun equipAxe(axe: Axe) {
+        _equippedWeapon = axe
+    }
+
+    override fun equipBow(bow: Bow) {
+        _equippedWeapon = bow
     }
 }

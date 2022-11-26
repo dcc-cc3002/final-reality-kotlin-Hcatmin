@@ -8,9 +8,7 @@
 package cl.uchile.dcc.finalreality.model.character.player.mage
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
-import cl.uchile.dcc.finalreality.model.inventory.magic.Staff
-import java.lang.AssertionError
+import cl.uchile.dcc.finalreality.model.inventory.Weapon
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -59,7 +57,7 @@ class WhiteMage(
         "currentHp= $currentHp " +
         "}"
 
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = weapon.isEquipped(this);
+    override fun equip(weapon: Weapon) {
+        weapon.equipToWhiteMage(this)
     }
 }

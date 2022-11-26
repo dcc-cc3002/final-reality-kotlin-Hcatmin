@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.character.player.melee
 
+import cl.uchile.dcc.finalreality.exceptions.UnsupportedEquipmentException
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.magic.setUpStaff
 import cl.uchile.dcc.finalreality.model.inventory.magic.staff1
@@ -88,10 +89,10 @@ class ThiefTest : FunSpec({
     }
 
     test("A Thief shouldn't equip the others weapon") {
-        shouldThrow<AssertionError> {
+        shouldThrow<UnsupportedEquipmentException> {
             thief1.equip(axe1)
         }
-        shouldThrow<AssertionError> {
+        shouldThrow<UnsupportedEquipmentException> {
             thief1.equip(staff1)
         }
     }

@@ -8,7 +8,8 @@
 package cl.uchile.dcc.finalreality.model.character.player.mage
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.Weapon
+import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Knife
 import java.util.Objects
 import java.util.concurrent.BlockingQueue
 
@@ -61,7 +62,11 @@ class BlackMage(
         "currentHp= $currentHp " +
         "}"
 
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = weapon.isEquipped(this)
+    override fun equip(weapon: Weapon) {
+        weapon.equipToBlackMage(this)
+    }
+
+    override fun equipKnife(knife: Knife) {
+        _equippedWeapon = knife
     }
 }

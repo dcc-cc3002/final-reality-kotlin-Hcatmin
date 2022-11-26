@@ -3,6 +3,7 @@ package cl.uchile.dcc.finalreality.model.character.player.mage
 import cl.uchile.dcc.finalreality.exceptions.Require
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.character.player.melee.AbstractPlayerCharacter
+import cl.uchile.dcc.finalreality.model.inventory.magic.Staff
 import java.util.concurrent.BlockingQueue
 
 /**
@@ -34,4 +35,7 @@ abstract class AbstractMageCharacter(
         set(value) {
             field = Require.Stat(value, "Current MP") inRange 0..maxMp
         }
+    override fun equipStaff(staff: Staff) {
+        _equippedWeapon = staff
+    }
 }

@@ -1,7 +1,5 @@
 package cl.uchile.dcc.finalreality.model.inventory.magic
 
-import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
-
 /**
  * A class that holds all the information of a magic weapon.
  *
@@ -19,6 +17,6 @@ import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Roberto Alvarado~
  */
-interface MagicWeapon : GameWeapon {
+interface MagicWeapon {
     val magicdamage: Int
 }

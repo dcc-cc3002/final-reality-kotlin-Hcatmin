@@ -21,14 +21,14 @@ import cl.uchile.dcc.finalreality.model.character.player.melee.Thief
  * @author ~Your name~
  */
 
-interface GameWeapon {
+interface Weapon {
     val name: String
     val damage: Int
     val weight: Int
 
-    fun isEquipped(blackMage: BlackMage): GameWeapon
-    fun isEquipped(engineer: Engineer): GameWeapon
-    fun isEquipped(knight: Knight): GameWeapon
-    fun isEquipped(thief: Thief): GameWeapon
-    fun isEquipped(whiteMage: WhiteMage): GameWeapon
+    fun equipToBlackMage(blackMage: BlackMage)
+    fun equipToEngineer(engineer: Engineer)
+    fun equipToKnight(knight: Knight)
+    fun equipToThief(thief: Thief)
+    fun equipToWhiteMage(whiteMage: WhiteMage)
 }

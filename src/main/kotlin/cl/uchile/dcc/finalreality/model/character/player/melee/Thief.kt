@@ -8,11 +8,10 @@
 package cl.uchile.dcc.finalreality.model.character.player.melee
 
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
-import cl.uchile.dcc.finalreality.model.inventory.GameWeapon
+import cl.uchile.dcc.finalreality.model.inventory.Weapon
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Bow
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Knife
 import cl.uchile.dcc.finalreality.model.inventory.nonmagic.Sword
-import java.lang.AssertionError
 /* ktlint-disable no-wildcard-imports */
 import java.util.* // https://pinterest.github.io/ktlint/faq/#how-do-i-globally-disable-a-rule
 /* ktlint-enable no-wildcard-imports */
@@ -55,7 +54,17 @@ class Thief(
     override fun toString() =
         "Thief { name= $name, maxHp= $maxHp, defense= $defense, currentHp= $currentHp }"
 
-    override fun equip(weapon: GameWeapon) {
-        _equippedWeapon = weapon.isEquipped(this);
+    override fun equip(weapon: Weapon) = weapon.equipToThief(this)
+
+    override fun equipBow(bow: Bow) {
+        _equippedWeapon = bow
+    }
+
+    override fun equipKnife(knife: Knife) {
+        _equippedWeapon = knife
+    }
+
+    override fun equipSword(sword: Sword) {
+        _equippedWeapon = sword
     }
 }

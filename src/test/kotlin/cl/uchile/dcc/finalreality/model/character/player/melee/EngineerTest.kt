@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.character.player.melee
 
+import cl.uchile.dcc.finalreality.exceptions.UnsupportedEquipmentException
 import cl.uchile.dcc.finalreality.model.character.GameCharacter
 import cl.uchile.dcc.finalreality.model.inventory.magic.setUpStaff
 import cl.uchile.dcc.finalreality.model.inventory.magic.staff1
@@ -21,7 +22,6 @@ import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.haveSameHashCodeAs
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
-import java.lang.AssertionError
 import java.util.concurrent.LinkedBlockingQueue
 
 val queueEngineer = LinkedBlockingQueue<GameCharacter>()
@@ -86,13 +86,13 @@ class EngineerTest : FunSpec({
     }
 
     test("An Engineer shouldn't equip the others weapons") {
-        shouldThrow<AssertionError> {
+        shouldThrow<UnsupportedEquipmentException> {
             engineer1.equip(knife1)
         }
-        shouldThrow<AssertionError> {
+        shouldThrow<UnsupportedEquipmentException> {
             engineer1.equip(staff1)
         }
-        shouldThrow<AssertionError> {
+        shouldThrow<UnsupportedEquipmentException> {
             engineer1.equip(sword1)
         }
     }
